@@ -1,0 +1,27 @@
+name: GitHub Classroom Autograding
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  pagetable-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install xv6 dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            gcc-riscv64-linux-gnu \
+            binutils-riscv64-linux-gnu \
+            qemu-system-misc \
+            python3 \
+            make
+
+      - name: Run pagetable tests
+        run: |
+          python3 test-xv6.py pagetable
